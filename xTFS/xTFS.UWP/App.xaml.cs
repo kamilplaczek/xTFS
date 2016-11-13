@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Iconize.Fonts;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -46,6 +47,8 @@ namespace xTFS.UWP
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+
+			Plugin.Iconize.Iconize.With(new FontAwesomeModule());
 
 			Frame rootFrame = Window.Current.Content as Frame;
 
