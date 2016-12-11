@@ -117,8 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActionSheetCancelAction" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ErrorPopupTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="LoginButton" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="LoginPageTitle" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="NoTeamsForProjectError" xml:space="preserve">
+    <value>Selected project has no teams defined.</value>
+  </data>
+  <data name="OkButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
   <data name="PasswordLabel" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="ProjectsListPageTitle" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SelectTeamActionSheetTitle" xml:space="preserve">
+    <value>Select team</value>
+  </data>
+  <data name="TfsAddressLabel" xml:space="preserve">
+    <value>TFS address</value>
+  </data>
+  <data name="TfsAddressPlaceholder" xml:space="preserve">
+    <value>eg. https://username.visualstudio.com</value>
   </data>
   <data name="UsernameLabel" xml:space="preserve">
     <value>Username</value>

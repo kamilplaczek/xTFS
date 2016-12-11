@@ -10,6 +10,7 @@ namespace xTFS.Navigation
 {
 	public interface IExtNavigationService : INavigationService
 	{
+		void SetMainPage(string pageKey);
 		Task NavigateToModal(string pageKey, object parameter = null);
 		void Initialize(NavigationPage navigation);
 	}

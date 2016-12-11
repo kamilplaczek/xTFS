@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 BindingContext="{Binding Source={StaticResource Locator}, Path=IterationsList}"  
+			 xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+			 Title="Iterations"
+             x:Class="xTFS.Views.IterationsListPage">
+  <Grid>
+	<Grid.RowDefinitions>
+	  <RowDefinition Height="Auto"></RowDefinition>
+	  <RowDefinition Height="*"></RowDefinition>
+	</Grid.RowDefinitions>
+	<Label Text="Iterations"></Label>
+	<ListView ItemsSource="{Binding Iterations}" Grid.Row="1">
+	  <ListView.ItemTemplate>
+		<DataTemplate>
+		  <ViewCell>
+			<StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+			  <StackLayout Margin="10" Orientation="Horizontal" VerticalOptions="End">
+				<iconize:IconLabel Text="fa-calendar-check-o" FontSize="14" Margin ="10"/>
+				<Label Text="{Binding Name}" FontSize="20"/>
+			  </StackLayout>
+			</StackLayout>
+		  </ViewCell>
+		</DataTemplate>
+	  </ListView.ItemTemplate>
+	</ListView>
+  </Grid>
+</ContentPage>

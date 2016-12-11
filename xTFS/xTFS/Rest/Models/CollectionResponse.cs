@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace xTFS.Rest.Models
 {
-	public class ProjectCollection
+	public class CollectionResponse<T>
 	{
 		public int Count { get; set; }
-		public IEnumerable<Project> Value { get; set; }
+		public IEnumerable<T> Value { get; set; }
 	}
 }

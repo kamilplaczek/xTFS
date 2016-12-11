@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 using xTFS.Helpers;
 using xTFS.Navigation;
 using xTFS.Rest;
@@ -65,7 +66,10 @@ namespace xTFS.ViewModels
 					else
 					{
 						_tfsService.Init(_login, _password, Settings.TfsAddress);
+						// retrieve projects list and check if credentials are valid
 						var projects = await _tfsService.GetProjects();
+						_navService.NavigateTo(Locator.ProjectsListPage);
+						MessagingCenter.Send(this, Messages.SetProjectsListMessage, projects);
 					}
 				});
 			}

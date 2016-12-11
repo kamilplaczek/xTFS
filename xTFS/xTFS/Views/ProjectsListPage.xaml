@@ -1,6 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 Title="Projects"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BindingContext="{Binding Source={StaticResource Locator}, Path=ProjectsList}"
+			 xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+			 xmlns:c="clr-namespace:xTFS.Converters;assembly=xTFS"
+			 xmlns:b="clr-namespace:xTFS.Behaviors;assembly=xTFS"
              x:Class="xTFS.Views.ProjectsListPage">
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ContentPage.Resources>
+	<ResourceDictionary>
+	  <c:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
+	</ResourceDictionary>
+  </ContentPage.Resources>
+  <ListView IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshProjectsCommand}" ItemsSource="{Binding Projects}">
+	<ListView.Behaviors>
+	  <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectProjectCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
+	</ListView.Behaviors>
+	<ListView.ItemTemplate>
+	  <DataTemplate>
+		<ViewCell>
+		  <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+			<StackLayout Orientation="Horizontal" VerticalOptions="End">
+			  <iconize:IconLabel Text="fa-folder-o" FontSize="42" Margin ="10"/>
+			  <StackLayout Orientation="Vertical" VerticalOptions="Center">
+				<Label Text="{Binding Name}" FontSize="20"/>
+				<Label Text="{Binding Description}" HorizontalOptions="EndAndExpand" />
+			  </StackLayout>
+			</StackLayout>
+		  </StackLayout>
+		</ViewCell>
+	  </DataTemplate>
+	</ListView.ItemTemplate>
+  </ListView>
 </ContentPage>

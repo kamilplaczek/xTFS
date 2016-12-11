@@ -1,0 +1,17 @@
+﻿<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+				 xmlns:i18n="clr-namespace:xTFS.Resources;assembly=xTFS"
+				  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"                 
+				  xmlns:local="clr-namespace:xTFS.Views;assembly=xTFS"
+				  MasterBehavior="Popover"
+                  x:Class="xTFS.Views.ProjectDetailsPage">
+  <MasterDetailPage.Master>
+	<local:IterationsListPage  />
+  </MasterDetailPage.Master>
+  <MasterDetailPage.Detail>
+	<NavigationPage>
+	  <x:Arguments>
+	<local:WorkItemsList  />
+	  </x:Arguments>
+	</NavigationPage>
+  </MasterDetailPage.Detail>
+</MasterDetailPage>

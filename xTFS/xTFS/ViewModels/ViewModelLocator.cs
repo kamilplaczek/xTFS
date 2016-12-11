@@ -41,11 +41,17 @@ namespace xTFS.ViewModels
             SimpleIoc.Default.Register<MainViewModel>();
 			SimpleIoc.Default.Register<LoginViewModel>();
 			SimpleIoc.Default.Register<SettingsViewModel>();
+			SimpleIoc.Default.Register<ProjectsListViewModel>();
+			SimpleIoc.Default.Register<IterationsListViewModel>();
 
 			var nav = new ExtNavigationService();
 			nav.Configure(Locator.LoginPage, typeof(LoginPage));
 			nav.Configure(Locator.MainPage, typeof(MainPage));
 			nav.Configure(Locator.SettingsPage, typeof(SettingsPage));
+			nav.Configure(Locator.ProjectsListPage, typeof(ProjectsListPage));
+			nav.Configure(Locator.ProjectDetailsPage, typeof(ProjectDetailsPage));
+			nav.Configure(Locator.IterationsListPage, typeof(IterationsListPage));
+
 			SimpleIoc.Default.Register<IExtNavigationService>(() => nav);
 			SimpleIoc.Default.Register<IPopupService, PopupService>();
 			SimpleIoc.Default.Register<ITfsService, TfsService>();
@@ -72,6 +78,22 @@ namespace xTFS.ViewModels
 			get
 			{
 				return ServiceLocator.Current.GetInstance<SettingsViewModel>();
+			}
+		}
+
+		public ProjectsListViewModel ProjectsList
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<ProjectsListViewModel>();
+			}
+		}
+
+		public IterationsListViewModel IterationsList
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<IterationsListViewModel>();
 			}
 		}
 

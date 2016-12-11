@@ -39,6 +39,12 @@ namespace xTFS.Navigation
 			_navigation.PopAsync();
 		}
 
+		public void SetMainPage(string pageKey)
+		{
+			var page = GetPage(pageKey, null);
+			App.Current.MainPage = page;
+		}
+
 		public async Task NavigateToModal(string pageKey, object parameter = null)
 		{
 			var page = GetPage(pageKey, parameter);

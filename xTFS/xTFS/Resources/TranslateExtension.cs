@@ -43,7 +43,7 @@ namespace xTFS.Resources
 			{
 #if DEBUG
 				throw new ArgumentException(
-					String.Format("Key '{0}' was not found in resources '{1}' for culture '{2}'.", Text, ResourceId, ci.Name),
+					String.Format("Key '{0}' was not found in resources '{1}'.", Text, ResourceId),
 					"Text");
 #else
                 translation = Text; // HACK: returns the key, which GETS DISPLAYED TO THE USER

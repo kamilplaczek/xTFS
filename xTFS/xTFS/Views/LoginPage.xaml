@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:i18n="clr-namespace:xTFS.Resources;assembly=xTFS"
+			 Title="{i18n:TranslateExtension LoginPageTitle}"
 			 xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BindingContext="{Binding Source={StaticResource Locator}, Path=Login}"
              x:Class="xTFS.Views.LoginPage">
@@ -17,8 +18,8 @@
 	<Label Text="{i18n:TranslateExtension UsernameLabel}" Grid.Row="0"></Label>
 	<Entry Text="{Binding Login}" Grid.Row="1"></Entry>
 	<Label Text="{i18n:TranslateExtension PasswordLabel}" Grid.Row="2"></Label>
-	<Entry Text="{Binding Password}" Grid.Row="3"></Entry>
-	<Button Text="Sign in"   Command="{Binding LoginCommand}" Grid.Row="4"></Button>
+	<Entry IsPassword="true" Text="{Binding Password}" Grid.Row="3"></Entry>
+	<Button Text="{i18n:TranslateExtension LoginButton}"   Command="{Binding LoginCommand}" Grid.Row="4"></Button>
 	<iconize:IconButton Text="fa-gears" Command="{Binding SettingsCommand}"  Grid.Row="5"></iconize:IconButton>
   </Grid>
 </ContentPage>

@@ -9,6 +9,9 @@ namespace xTFS.Rest
 {
 	public interface ITfsService : IBaseService
 	{
-		Task<ProjectCollection> GetProjects();
+		Task<ProjectDetails> GetProject(string id);
+		Task<CollectionResponse<Project>> GetProjects();
+		Task<CollectionResponse<Team>> GetTeams(string projectId);
+		Task<CollectionResponse<Iteration>> GetIterations(string projectId, string teamId);
 	}
 }
