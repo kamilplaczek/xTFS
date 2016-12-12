@@ -14,5 +14,6 @@ namespace xTFS.Helpers
 		public const string ProjectsListPage = "ProjectsListPage";
 		public const string ProjectDetailsPage = "ProjectDetailsPage";
 		public const string IterationsListPage = "IterationsListPage";
+		public const string WorkItemsListPage = "WorkItemsListPage";
 	}
 }

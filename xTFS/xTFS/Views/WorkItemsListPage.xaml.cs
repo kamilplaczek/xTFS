@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace xTFS.Views
 {
-	public partial class WorkItemsList : ContentPage
+	public partial class WorkItemsListPage : ContentPage
 	{
-		public WorkItemsList()
+		public WorkItemsListPage()
 		{
 			InitializeComponent();
 		}

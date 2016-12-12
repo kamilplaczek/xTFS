@@ -21,6 +21,10 @@ namespace xTFS
 			MainPage = firstPage;
 			var navService = SimpleIoc.Default.GetInstance<IExtNavigationService>();
 			navService.Initialize(firstPage);
+			if (!String.IsNullOrEmpty(Settings.TfsAddress) && !String.IsNullOrEmpty(Settings.Password) && !String.IsNullOrEmpty(Settings.Username))
+			{
+				MessagingCenter.Send(this, Messages.SignInMessage);
+			}
 		}
 
 		protected override void OnStart()

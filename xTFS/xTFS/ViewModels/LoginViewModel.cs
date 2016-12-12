@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using xTFS.Helpers;
 using xTFS.Navigation;
 using xTFS.Rest;
+using xTFS.Rest.Exceptions;
 using xTFS.Services;
 
 namespace xTFS.ViewModels
@@ -65,11 +66,7 @@ namespace xTFS.ViewModels
 					}
 					else
 					{
-						_tfsService.Init(_login, _password, Settings.TfsAddress);
-						// retrieve projects list and check if credentials are valid
-						var projects = await _tfsService.GetProjects();
-						_navService.NavigateTo(Locator.ProjectsListPage);
-						MessagingCenter.Send(this, Messages.SetProjectsListMessage, projects);
+						await SignIn(_login, _password);
 					}
 				});
 			}
@@ -91,6 +88,33 @@ namespace xTFS.ViewModels
 			_navService = navService;
 			_popupService = popupService;
 			_tfsService = tfsService;
+
+			MessagingCenter.Subscribe<App>(this, Messages.SignInMessage, async (sender) =>
+			{
+				if (!String.IsNullOrEmpty(Settings.Password) && !String.IsNullOrEmpty(Settings.Username))
+				{
+					await SignIn(Settings.Username, Settings.Password);
+				}
+			});
+		}
+
+		private async Task SignIn(string username, string password)
+		{
+			_tfsService.Init(username, password, Settings.TfsAddress);
+			// retrieve projects list and check if credentials are valid
+			try
+			{
+				var projects = await _tfsService.GetProjects();
+				// login successful - store username and password
+				Settings.Username = username;
+				Settings.Password = password;
+				_navService.NavigateTo(Locator.ProjectsListPage);
+				MessagingCenter.Send(this, Messages.SetProjectsListMessage, projects);
+			}
+			catch (ServiceException e)
+			{
+				// handle
+			}
 		}
 	}
 }

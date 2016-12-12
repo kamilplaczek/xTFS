@@ -51,6 +51,11 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\TranslateExtension.cs" />
+    <Compile Include="Resources\WIQLQueries.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WIQLQueries.resx</DependentUpon>
+    </Compile>
     <Compile Include="Rest\Base\BaseService.cs" />
     <Compile Include="Navigation\ExtNavigationService.cs" />
     <Compile Include="Rest\Base\IBaseService.cs" />
@@ -60,8 +65,11 @@
     <Compile Include="Rest\Models\Iteration.cs" />
     <Compile Include="Rest\Models\IterationAttributes.cs" />
     <Compile Include="Rest\Models\Project.cs" />
+    <Compile Include="Rest\Models\WIQLResponse.cs" />
     <Compile Include="Rest\Models\Team.cs" />
     <Compile Include="Rest\Models\ProjectDetails.cs" />
+    <Compile Include="Rest\Models\WIQLRequest.cs" />
+    <Compile Include="Rest\Models\WorkItem.cs" />
     <Compile Include="Rest\TfsService.cs" />
     <Compile Include="Services\IPopupService.cs" />
     <Compile Include="Services\PopupService.cs" />
@@ -70,6 +78,7 @@
     <Compile Include="ViewModels\ProjectDetailsViewModel.cs" />
     <Compile Include="ViewModels\ProjectsListViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\WorkItemsListViewModel.cs" />
     <Compile Include="Views\IterationsListPage.xaml.cs">
       <DependentUpon>IterationsListPage.xaml</DependentUpon>
     </Compile>
@@ -91,14 +100,18 @@
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WorkItemsList.xaml.cs">
-      <DependentUpon>WorkItemsList.xaml</DependentUpon>
+    <Compile Include="Views\WorkItemsListPage.xaml.cs">
+      <DependentUpon>WorkItemsListPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WIQLQueries.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WIQLQueries.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>
@@ -207,7 +220,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\WorkItemsList.xaml">
+    <EmbeddedResource Include="Views\WorkItemsListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

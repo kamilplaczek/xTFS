@@ -6,11 +6,6 @@
 			 xmlns:c="clr-namespace:xTFS.Converters;assembly=xTFS"
 			 xmlns:b="clr-namespace:xTFS.Behaviors;assembly=xTFS"
              x:Class="xTFS.Views.ProjectsListPage">
-  <ContentPage.Resources>
-	<ResourceDictionary>
-	  <c:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
-	</ResourceDictionary>
-  </ContentPage.Resources>
   <ListView IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshProjectsCommand}" ItemsSource="{Binding Projects}">
 	<ListView.Behaviors>
 	  <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectProjectCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
