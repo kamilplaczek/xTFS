@@ -16,7 +16,7 @@ using xTFS.Services;
 
 namespace xTFS.ViewModels
 {
-	public class LoginViewModel : ViewModelBase
+	public class LoginViewModel : BaseViewModel
 	{
 		private readonly IExtNavigationService _navService;
 		private readonly IPopupService _popupService;
@@ -88,7 +88,6 @@ namespace xTFS.ViewModels
 			_navService = navService;
 			_popupService = popupService;
 			_tfsService = tfsService;
-
 			MessagingCenter.Subscribe<App>(this, Messages.SignInMessage, async (sender) =>
 			{
 				if (!String.IsNullOrEmpty(Settings.Password) && !String.IsNullOrEmpty(Settings.Username))
@@ -108,7 +107,7 @@ namespace xTFS.ViewModels
 				// login successful - store username and password
 				Settings.Username = username;
 				Settings.Password = password;
-				_navService.NavigateTo(Locator.ProjectsListPage);
+				_navService.SetMainPage(Locator.ProjectsListPage);
 				MessagingCenter.Send(this, Messages.SetProjectsListMessage, projects);
 			}
 			catch (ServiceException e)

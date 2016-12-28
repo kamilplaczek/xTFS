@@ -59,6 +59,9 @@
     <Compile Include="Rest\Base\BaseService.cs" />
     <Compile Include="Navigation\ExtNavigationService.cs" />
     <Compile Include="Rest\Base\IBaseService.cs" />
+    <Compile Include="Rest\Base\JsonNetDeserializer.cs" />
+    <Compile Include="Rest\Enums\WorkItemState.cs" />
+    <Compile Include="Rest\Enums\WorkItemType.cs" />
     <Compile Include="Rest\Exceptions\ServiceException.cs" />
     <Compile Include="Rest\ITfsService.cs" />
     <Compile Include="Rest\Models\CollectionResponse.cs" />
@@ -70,15 +73,18 @@
     <Compile Include="Rest\Models\ProjectDetails.cs" />
     <Compile Include="Rest\Models\WIQLRequest.cs" />
     <Compile Include="Rest\Models\WorkItem.cs" />
+    <Compile Include="Rest\Models\WorkItemFields.cs" />
     <Compile Include="Rest\TfsService.cs" />
     <Compile Include="Services\IPopupService.cs" />
     <Compile Include="Services\PopupService.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\IterationsListViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProjectDetailsViewModel.cs" />
     <Compile Include="ViewModels\ProjectsListViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\WorkItemsListViewModel.cs" />
+    <Compile Include="Views\BasePage.cs" />
     <Compile Include="Views\IterationsListPage.xaml.cs">
       <DependentUpon>IterationsListPage.xaml</DependentUpon>
     </Compile>

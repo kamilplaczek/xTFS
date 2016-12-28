@@ -11,7 +11,7 @@ using xTFS.Navigation;
 
 namespace xTFS.ViewModels
 {
-	public class SettingsViewModel : ViewModelBase
+	public class SettingsViewModel : BaseViewModel
 	{
 		private readonly IExtNavigationService _navService;
 

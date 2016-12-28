@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
 			 Title="Projects"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BindingContext="{Binding Source={StaticResource Locator}, Path=ProjectsList}"
 			 xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
 			 xmlns:c="clr-namespace:xTFS.Converters;assembly=xTFS"
 			 xmlns:b="clr-namespace:xTFS.Behaviors;assembly=xTFS"
+			 xmlns:v="clr-namespace:xTFS.Views;assembly=xTFS"
              x:Class="xTFS.Views.ProjectsListPage">
   <ListView IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshProjectsCommand}" ItemsSource="{Binding Projects}">
 	<ListView.Behaviors>
@@ -26,4 +27,4 @@
 	  </DataTemplate>
 	</ListView.ItemTemplate>
   </ListView>
-</ContentPage>
+</v:BasePage>

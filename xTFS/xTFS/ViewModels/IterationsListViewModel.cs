@@ -15,7 +15,7 @@ using xTFS.Rest.Models;
 
 namespace xTFS.ViewModels
 {
-	public class IterationsListViewModel : ViewModelBase
+	public class IterationsListViewModel : BaseViewModel
 	{
 		private readonly ITfsService _tfsService;
 		private readonly IExtNavigationService _navService;
@@ -53,13 +53,21 @@ namespace xTFS.ViewModels
 			{
 				return new RelayCommand<Iteration>(async (iteration) =>
 				{
-					var ids = await _tfsService.GetWorkItemIdsByIteration(_project.Name, iteration.Name);
-					MessagingCenter.Send(this, Messages.SetIterationMessage, ids);
-					_navService.NavigateTo(Locator.WorkItemsListPage);
+					await SetIteration(iteration);
 				});
 			}
 		}
 
+		public ICommand GoBackCommand
+		{
+			get
+			{
+				return new RelayCommand(() =>
+				{
+					_navService.SetMainPage(Locator.ProjectsListPage);
+				});
+			}
+		}
 
 		public IterationsListViewModel(ITfsService tfsService, IExtNavigationService navService)
 		{
@@ -75,7 +83,21 @@ namespace xTFS.ViewModels
 		{
 			Project = await _tfsService.GetProject(id);
 			var iterations = await _tfsService.GetIterations(id, _project.DefaultTeam.Id);
-			Iterations = new ObservableCollection<Iteration>(iterations.Value);
+			if (iterations.Value.Any())
+			{
+				Iterations = new ObservableCollection<Iteration>(iterations.Value);
+				var now = DateTime.Now;
+				var selectedIteration = Iterations.FirstOrDefault(i => i.Attributes.StartDate.HasValue && i.Attributes.StartDate.Value <= now
+					&& i.Attributes.EndDate.HasValue && i.Attributes.EndDate.Value >= now) ?? Iterations.First();
+				await SetIteration(selectedIteration);
+			}
+		}
+
+		private async Task SetIteration(Iteration iteration)
+		{
+			var ids = await _tfsService.GetWorkItemIdsByIteration(_project.Name, iteration.Name);
+			MessagingCenter.Send(this, Messages.SetIterationMessage, ids);
+			_navService.NavigateTo(Locator.WorkItemsListPage);
 		}
 	}
 }

@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace xTFS.Views
 {
-	public partial class ProjectsListPage : ContentPage
+	public partial class ProjectsListPage : BasePage
 	{
 		public ProjectsListPage()
 		{

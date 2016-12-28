@@ -10,8 +10,9 @@
 	<Grid.RowDefinitions>
 	  <RowDefinition Height="Auto"></RowDefinition>
 	  <RowDefinition Height="*"></RowDefinition>
+	  <RowDefinition Height="Auto"></RowDefinition>
 	</Grid.RowDefinitions>
-	<Label Text="Iterations"></Label>
+	<Label Margin="10" Text="{Binding Project.Name}" FontSize="24"></Label>
 	<ListView ItemsSource="{Binding Iterations}" Grid.Row="1">
 	  <ListView.Behaviors>
 		<b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectIterationCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
@@ -29,5 +30,6 @@
 		</DataTemplate>
 	  </ListView.ItemTemplate>
 	</ListView>
+	<iconize:IconButton FontSize="20" Text="fa-arrow-circle-o-left" Command="{Binding GoBackCommand}" Grid.Row="2"></iconize:IconButton>
   </Grid>
 </ContentPage>

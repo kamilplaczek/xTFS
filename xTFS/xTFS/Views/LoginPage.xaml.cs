@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace xTFS.Views
 {
-	public partial class LoginPage : ContentPage
+	public partial class LoginPage : BasePage
 	{
 		public LoginPage()
 		{

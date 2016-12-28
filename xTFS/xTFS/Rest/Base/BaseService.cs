@@ -1,5 +1,6 @@
 ﻿using RestSharp.Portable;
 using RestSharp.Portable.Authenticators;
+using RestSharp.Portable.Deserializers;
 using RestSharp.Portable.HttpClient;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using xTFS.Rest.Base;
 using xTFS.Rest.Exceptions;
 
 namespace xTFS.Rest
@@ -14,6 +16,11 @@ namespace xTFS.Rest
 	public class BaseService : IDisposable, IBaseService
 	{
 		private readonly RestClient _restClient = new RestClient();
+
+		public BaseService()
+		{
+			_restClient.AddHandler("application/json", new JsonNetDeserializer());
+		}
 
 		public void Dispose()
 		{

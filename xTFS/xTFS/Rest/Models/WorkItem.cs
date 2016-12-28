@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace xTFS.Rest.Models
 	{
 		public int Id { get; set; }
 		public int Rev { get; set; }
-		// TODO: finish mapping WI fields
 		public string Url { get; set; }
+		public WorkItemFields Fields { get; set; }
 	}
 }

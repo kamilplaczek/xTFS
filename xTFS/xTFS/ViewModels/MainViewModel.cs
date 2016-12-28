@@ -14,8 +14,8 @@ namespace xTFS.ViewModels
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
-    {
+    public class MainViewModel : BaseViewModel
+	{
 		private string _welcomeText;
 
 		public string WelcomeText

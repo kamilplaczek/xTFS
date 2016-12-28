@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
 			 Title="{i18n:TranslateExtension LoginPageTitle}"
 			  xmlns:i18n="clr-namespace:xTFS.Resources;assembly=xTFS"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BindingContext="{Binding Source={StaticResource Locator}, Path=Settings}"
+			 xmlns:v="clr-namespace:xTFS.Views;assembly=xTFS"
              x:Class="xTFS.Views.SettingsPage">
   <Grid VerticalOptions="Center" Margin="20">
 	<Grid.RowDefinitions>
@@ -16,4 +17,4 @@
 	<Button Text="{i18n:TranslateExtension SaveButton}" Command="{Binding SaveCommand}" Grid.Row="2"></Button>
 	<Button Text="{i18n:TranslateExtension CancelButton}" Command="{Binding CancelCommand}"  Grid.Row="3"></Button>
   </Grid>
-</ContentPage>
+</v:BasePage>

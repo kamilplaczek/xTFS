@@ -17,7 +17,7 @@ using xTFS.Services;
 
 namespace xTFS.ViewModels
 {
-	public class ProjectsListViewModel : ViewModelBase
+	public class ProjectsListViewModel : BaseViewModel
 	{
 		private readonly ITfsService _tfsService;
 		private readonly IPopupService _popupService;

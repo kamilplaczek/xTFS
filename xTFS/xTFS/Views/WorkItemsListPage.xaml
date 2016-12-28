@@ -1,8 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 Title="Work items" BindingContext="{Binding Source={StaticResource Locator}, Path=WorkItemsList}"
 			 xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+			 xmlns:b="clr-namespace:xTFS.Behaviors;assembly=xTFS"
+			 xmlns:v="clr-namespace:xTFS.Views;assembly=xTFS"
              x:Class="xTFS.Views.WorkItemsListPage">
-  <Label Text="Work items list." VerticalOptions="Center" HorizontalOptions="Center" />
-</ContentPage>
+  <Grid>
+	<Grid.RowDefinitions>
+	  <RowDefinition Height="Auto"></RowDefinition>
+	  <RowDefinition Height="*"></RowDefinition>
+	</Grid.RowDefinitions>
+	<ListView ItemsSource="{Binding WorkItems}" Grid.Row="1">
+	  <ListView.Behaviors>
+		<b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectWorkItemCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
+	  </ListView.Behaviors>
+	  <ListView.ItemTemplate>
+		<DataTemplate>
+		  <ViewCell>
+			<StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+			  <StackLayout Margin="10" Orientation="Horizontal" VerticalOptions="End">
+				<iconize:IconLabel Text="fa-square-o" FontSize="30" Margin ="10"/>
+				<StackLayout Orientation="Vertical">
+				  <Label Text="{Binding Fields.Title}" FontSize="20"/>
+				  <StackLayout Orientation="Horizontal">
+					<Label Text="{Binding Fields.State}" />
+					<Label Margin="5,0,0,0" Text="{Binding Fields.CreatedBy}" />
+				  </StackLayout>
+				</StackLayout>
+			  </StackLayout>
+			</StackLayout>
+		  </ViewCell>
+		</DataTemplate>
+	  </ListView.ItemTemplate>
+	</ListView>
+  </Grid>
+</v:BasePage>
