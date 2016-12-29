@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 
-namespace xTFS
+namespace xTFS.Views
 {
-	public partial class MainPage : ContentPage
+	public partial class WorkItemDetailsPage : BasePage
 	{
-		public MainPage()
+		public WorkItemDetailsPage()
 		{
 			InitializeComponent();
 		}

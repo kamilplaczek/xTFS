@@ -43,6 +43,15 @@ namespace xTFS.Navigation
 		{
 			var page = GetPage(pageKey, null);
 			App.Current.MainPage = page;
+			var md = page as MasterDetailPage;
+			var navToSet = md?.Detail ?? page;
+			var nav = navToSet as NavigationPage;
+			if (nav == null)
+			{
+				// wrap page in navigation page
+				nav = new NavigationPage(navToSet);
+			}
+			_navigation = nav;
 		}
 
 		public async Task NavigateToModal(string pageKey, object parameter = null)

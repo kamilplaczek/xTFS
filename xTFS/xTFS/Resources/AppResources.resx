@@ -120,11 +120,20 @@
   <data name="ActionSheetCancelAction" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="AssignedToLabel" xml:space="preserve">
+    <value>Assigned to</value>
+  </data>
   <data name="CancelButton" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="ErrorPopupTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="IterationLabel" xml:space="preserve">
+    <value>Iteration</value>
   </data>
   <data name="LoginButton" xml:space="preserve">
     <value>Sign in</value>
@@ -141,6 +150,9 @@
   <data name="PasswordLabel" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PriorityLabel" xml:space="preserve">
+    <value>Priority</value>
+  </data>
   <data name="ProjectsListPageTitle" xml:space="preserve">
     <value>Projects</value>
   </data>
@@ -150,11 +162,17 @@
   <data name="SelectTeamActionSheetTitle" xml:space="preserve">
     <value>Select team</value>
   </data>
+  <data name="StateLabel" xml:space="preserve">
+    <value>State</value>
+  </data>
   <data name="TfsAddressLabel" xml:space="preserve">
     <value>TFS address</value>
   </data>
   <data name="TfsAddressPlaceholder" xml:space="preserve">
     <value>eg. https://username.visualstudio.com</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Title</value>
   </data>
   <data name="UsernameLabel" xml:space="preserve">
     <value>Username</value>

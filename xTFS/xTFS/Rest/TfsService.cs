@@ -45,7 +45,21 @@ namespace xTFS.Rest
 		public async Task<CollectionResponse<WorkItem>> GetWorkItems(IEnumerable<int> ids)
 		{
 			var param = String.Join(",", ids);
-			var result = await ExecuteRequest<CollectionResponse<WorkItem>>($"DefaultCollection/_apis/wit/workitems?ids={param}&api-version=1.0", Method.GET);
+			var result = await ExecuteRequest<CollectionResponse<WorkItem>>(
+				$"DefaultCollection/_apis/wit/workitems?ids={param}&fields=System.Title,System.AssignedTo,System.WorkItemType,System.State,Microsoft.VSTS.Common.Priority&api-version=1.0", Method.GET);
+			return result;
+		}
+
+		public async Task<WorkItem> GetWorkItemDetails(int id)
+		{
+			var result = await ExecuteRequest<CollectionResponse<WorkItem>>(
+				$"DefaultCollection/_apis/wit/workitems?ids={id}&fields=System.Title,System.Description,System.AssignedTo,System.IterationPath,System.WorkItemType,System.State,Microsoft.VSTS.Common.Priority&api-version=1.0", Method.GET);
+			return result?.Value?.FirstOrDefault();
+		}
+
+		public async Task<WorkItem> UpdateWorkItem(int id, IEnumerable<WorkItemPatch> patches)
+		{
+			var result = await ExecuteRequest<WorkItem>($"DefaultCollection/_apis/wit/workitems/{id}?api-version=1.0", Method.PATCH, patches, "application/json-patch+json");
 			return result;
 		}
 

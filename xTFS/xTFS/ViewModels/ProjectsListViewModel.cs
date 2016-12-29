@@ -21,7 +21,6 @@ namespace xTFS.ViewModels
 	{
 		private readonly ITfsService _tfsService;
 		private readonly IPopupService _popupService;
-		private readonly IExtNavigationService _navService;
 
 		private ObservableCollection<Project> _projects;
 
@@ -80,11 +79,10 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public ProjectsListViewModel(ITfsService tfsService, IPopupService popupService, IExtNavigationService navService)
+		public ProjectsListViewModel(ITfsService tfsService, IPopupService popupService, IExtNavigationService navService) : base(navService)
 		{
 			_tfsService = tfsService;
 			_popupService = popupService;
-			_navService = navService;
 			MessagingCenter.Subscribe<LoginViewModel, CollectionResponse<Project>>(this, Messages.SetProjectsListMessage, (sender, args) =>
 			{
 				Projects = new ObservableCollection<Project>(args.Value);

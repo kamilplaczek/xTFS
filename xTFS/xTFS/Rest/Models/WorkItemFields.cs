@@ -19,11 +19,17 @@ namespace xTFS.Rest.Models
 		[JsonConverter(typeof(StringEnumConverter))]
 		public WorkItemType WorkItemType { get; set; }
 
-		[JsonProperty(PropertyName = "System.CreatedBy")]
-		public string CreatedBy { get; set; }
+		[JsonProperty(PropertyName = "System.AssignedTo")]
+		public string AssignedTo { get; set; }
 
 		[JsonProperty(PropertyName = "System.Title")]
 		public string Title { get; set; }
+
+		[JsonProperty(PropertyName = "System.Description")]
+		public string Description { get; set; }
+
+		[JsonProperty(PropertyName = "System.IterationPath")]
+		public string Iteration { get; set; }
 
 		[JsonProperty(PropertyName = "Microsoft.VSTS.Common.Priority")]
 		public int Priority { get; set; }

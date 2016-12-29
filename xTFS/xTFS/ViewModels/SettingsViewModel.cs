@@ -13,8 +13,6 @@ namespace xTFS.ViewModels
 {
 	public class SettingsViewModel : BaseViewModel
 	{
-		private readonly IExtNavigationService _navService;
-
 		private string _address;
 
 		public string Address
@@ -52,9 +50,8 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public SettingsViewModel(IExtNavigationService navService)
+		public SettingsViewModel(IExtNavigationService navService) : base(navService)
 		{
-			_navService = navService;
 			Address = Settings.TfsAddress;
 		}
 	}

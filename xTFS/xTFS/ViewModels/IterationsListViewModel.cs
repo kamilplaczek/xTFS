@@ -18,7 +18,6 @@ namespace xTFS.ViewModels
 	public class IterationsListViewModel : BaseViewModel
 	{
 		private readonly ITfsService _tfsService;
-		private readonly IExtNavigationService _navService;
 
 		private ObservableCollection<Iteration> _iterations;
 		private ProjectDetails _project;
@@ -69,10 +68,9 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public IterationsListViewModel(ITfsService tfsService, IExtNavigationService navService)
+		public IterationsListViewModel(ITfsService tfsService, IExtNavigationService navService) : base(navService)
 		{
 			_tfsService = tfsService;
-			_navService = navService;
 			MessagingCenter.Subscribe<ProjectsListViewModel, Project>(this, Messages.SetProjectMessage, async (sender, args) =>
 			{
 				await GetProjectDetails(args.Id);

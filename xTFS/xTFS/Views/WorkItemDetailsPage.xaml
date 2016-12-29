@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:i18n="clr-namespace:xTFS.Resources;assembly=xTFS"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 Title="Work item details"
+			 xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+			 BindingContext="{Binding Source={StaticResource Locator}, Path=WorkItemDetails}"
+			 xmlns:v="clr-namespace:xTFS.Views;assembly=xTFS"
+             x:Class="xTFS.Views.WorkItemDetailsPage">
+  <Grid>
+	<Grid.RowDefinitions>
+	  <RowDefinition Height="*" />
+	  <RowDefinition Height="Auto" />
+	</Grid.RowDefinitions>
+	<Grid Margin="10" Grid.Row="0">
+	  <Grid.RowDefinitions>
+		<RowDefinition Height="Auto" />
+		<RowDefinition Height="Auto" />
+		<RowDefinition Height="Auto" />
+		<RowDefinition Height="Auto" />
+		<RowDefinition Height="Auto" />
+		<RowDefinition Height="Auto" />
+	  </Grid.RowDefinitions>
+	  <Grid Grid.Row="0">
+		<Grid.RowDefinitions>
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Label Text="{i18n:TranslateExtension TitleLabel}" Grid.Row="0"></Label>
+		<Entry Text="{Binding WorkItem.Fields.Title}" Grid.Row="1"></Entry>
+	  </Grid>
+	  <Grid Grid.Row="1">
+		<Grid.RowDefinitions>
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Label Text="{i18n:TranslateExtension DescriptionLabel}" Grid.Row="0"></Label>
+		<Editor Text="{Binding WorkItem.Fields.Description}" HeightRequest="100" Grid.Row="1"></Editor>
+	  </Grid>
+	  <Grid Grid.Row="2">
+		<Grid.RowDefinitions>
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Label Text="{i18n:TranslateExtension AssignedToLabel}" Grid.Row="0"></Label>
+		<Picker Grid.Row="1"></Picker>
+	  </Grid>
+	  <Grid Grid.Row="3">
+		<Grid.RowDefinitions>
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Label Text="{i18n:TranslateExtension IterationLabel}" Grid.Row="0"></Label>
+		<Picker Grid.Row="1"></Picker>
+	  </Grid>
+	  <Grid Grid.Row="4">
+		<Grid.RowDefinitions>
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Label Text="{i18n:TranslateExtension StateLabel}" Grid.Row="0"></Label>
+		<Picker Grid.Row="1"></Picker>
+	  </Grid>
+	  <Grid Grid.Row="5">
+		<Grid.RowDefinitions>
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Label Text="{i18n:TranslateExtension PriorityLabel}" Grid.Row="0"></Label>
+		<Entry  Text="{Binding WorkItem.Fields.Priority}"  Keyboard="Numeric" Grid.Row="1"></Entry>
+	  </Grid>
+	</Grid>
+	<Grid Grid.Row="1">
+	  <Grid.ColumnDefinitions>
+		<ColumnDefinition Width="5*" />
+		<ColumnDefinition Width="5*" />
+	  </Grid.ColumnDefinitions>
+	  <iconize:IconButton Command="{Binding CancelCommand}" Grid.Column="0" FontSize="20" Text="fa-close"></iconize:IconButton>
+	  <iconize:IconButton Command="{Binding SaveCommand}" BackgroundColor="Green" TextColor="White" Grid.Column="1" FontSize="20" Text="fa-save"></iconize:IconButton>
+	</Grid>
+  </Grid>
+</v:BasePage>

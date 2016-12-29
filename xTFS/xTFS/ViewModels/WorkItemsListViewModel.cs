@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using xTFS.Helpers;
+using xTFS.Navigation;
 using xTFS.Rest;
 using xTFS.Rest.Models;
 
@@ -35,13 +36,15 @@ namespace xTFS.ViewModels
 		{
 			get
 			{
-				return new RelayCommand<WorkItem>(async (item) =>
+				return new RelayCommand<WorkItem>((item) =>
 				{
+					_navService.NavigateTo(Locator.WorkItemDetailsPage);
+					MessagingCenter.Send(this, Messages.SetWorkItemMessage, item);
 				});
 			}
 		}
 
-		public WorkItemsListViewModel(ITfsService tfsService)
+		public WorkItemsListViewModel(ITfsService tfsService, IExtNavigationService navService) : base(navService)
 		{
 			_tfsService = tfsService;
 			MessagingCenter.Subscribe<IterationsListViewModel, IEnumerable<int>>(this, Messages.SetIterationMessage, async (sender, args) => {

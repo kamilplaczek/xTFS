@@ -71,6 +71,15 @@ namespace xTFS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigned to.
+        /// </summary>
+        internal static string AssignedToLabel {
+            get {
+                return ResourceManager.GetString("AssignedToLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string CancelButton {
@@ -80,11 +89,29 @@ namespace xTFS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string DescriptionLabel {
+            get {
+                return ResourceManager.GetString("DescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string ErrorPopupTitle {
             get {
                 return ResourceManager.GetString("ErrorPopupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Iteration.
+        /// </summary>
+        internal static string IterationLabel {
+            get {
+                return ResourceManager.GetString("IterationLabel", resourceCulture);
             }
         }
         
@@ -134,6 +161,15 @@ namespace xTFS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Priority.
+        /// </summary>
+        internal static string PriorityLabel {
+            get {
+                return ResourceManager.GetString("PriorityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Projects.
         /// </summary>
         internal static string ProjectsListPageTitle {
@@ -161,6 +197,15 @@ namespace xTFS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to State.
+        /// </summary>
+        internal static string StateLabel {
+            get {
+                return ResourceManager.GetString("StateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TFS address.
         /// </summary>
         internal static string TfsAddressLabel {
@@ -175,6 +220,15 @@ namespace xTFS.Resources {
         internal static string TfsAddressPlaceholder {
             get {
                 return ResourceManager.GetString("TfsAddressPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        internal static string TitleLabel {
+            get {
+                return ResourceManager.GetString("TitleLabel", resourceCulture);
             }
         }
         

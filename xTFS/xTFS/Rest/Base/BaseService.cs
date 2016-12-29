@@ -33,20 +33,21 @@ namespace xTFS.Rest
 			_restClient.Authenticator = new HttpBasicAuthenticator(username, password);
 		}
 
-		protected async Task<T> ExecuteRequest<T>(string url, Method method, object body = null)
+		protected async Task<T> ExecuteRequest<T>(string url, Method method, object body = null, string contentType = "application/json")
 		{
-			var request = CreateRequest(url, method, body);
+			var request = CreateRequest(url, method, body, contentType);
 			var result = await _restClient.Execute<T>(request);
 			HandleResult(result);
 			return result.Data;
 		}
 
-		private RestRequest CreateRequest(string url, Method method, object body = null)
+		private RestRequest CreateRequest(string url, Method method, object body, string contentType)
 		{
 			var request = new RestRequest(url, method);
 			if (body != null)
 			{
 				request.AddBody(body);
+				request.AddOrUpdateHeader("Content-Type", contentType);
 			}
 			return request;
 		}

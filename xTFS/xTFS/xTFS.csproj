@@ -41,6 +41,7 @@
     <Compile Include="Behaviors\BindableBehavior.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Converters\ItemTappedConverter.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\Locator.cs" />
     <Compile Include="Helpers\Messages.cs" />
     <Compile Include="Helpers\Settings.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Navigation\ExtNavigationService.cs" />
     <Compile Include="Rest\Base\IBaseService.cs" />
     <Compile Include="Rest\Base\JsonNetDeserializer.cs" />
+    <Compile Include="Rest\Enums\WorkItemPatchOperator.cs" />
     <Compile Include="Rest\Enums\WorkItemState.cs" />
     <Compile Include="Rest\Enums\WorkItemType.cs" />
     <Compile Include="Rest\Exceptions\ServiceException.cs" />
@@ -74,15 +76,16 @@
     <Compile Include="Rest\Models\WIQLRequest.cs" />
     <Compile Include="Rest\Models\WorkItem.cs" />
     <Compile Include="Rest\Models\WorkItemFields.cs" />
+    <Compile Include="Rest\Models\WorkItemPatch.cs" />
     <Compile Include="Rest\TfsService.cs" />
     <Compile Include="Services\IPopupService.cs" />
     <Compile Include="Services\PopupService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\IterationsListViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\ProjectDetailsViewModel.cs" />
     <Compile Include="ViewModels\ProjectsListViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\WorkItemDetailsViewModel.cs" />
     <Compile Include="ViewModels\WorkItemsListViewModel.cs" />
     <Compile Include="Views\BasePage.cs" />
     <Compile Include="Views\IterationsListPage.xaml.cs">
@@ -91,11 +94,7 @@
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\ProjectDetailsPage.xaml.cs">
       <DependentUpon>ProjectDetailsPage.xaml</DependentUpon>
@@ -105,6 +104,9 @@
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkItemDetailsPage.xaml.cs">
+      <DependentUpon>WorkItemDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WorkItemsListPage.xaml.cs">
       <DependentUpon>WorkItemsListPage.xaml</DependentUpon>
@@ -118,10 +120,6 @@
     <EmbeddedResource Include="Resources\WIQLQueries.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WIQLQueries.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="App.xaml">
       <SubType>Designer</SubType>
@@ -227,6 +225,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\WorkItemsListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\WorkItemDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

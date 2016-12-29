@@ -18,7 +18,6 @@ namespace xTFS.ViewModels
 {
 	public class LoginViewModel : BaseViewModel
 	{
-		private readonly IExtNavigationService _navService;
 		private readonly IPopupService _popupService;
 		private readonly ITfsService _tfsService;
 
@@ -83,9 +82,8 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public LoginViewModel(IExtNavigationService navService, IPopupService popupService, ITfsService tfsService)
+		public LoginViewModel(IExtNavigationService navService, IPopupService popupService, ITfsService tfsService) : base(navService)
 		{
-			_navService = navService;
 			_popupService = popupService;
 			_tfsService = tfsService;
 			MessagingCenter.Subscribe<App>(this, Messages.SignInMessage, async (sender) =>
