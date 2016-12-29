@@ -12,8 +12,8 @@ namespace xTFS.Rest.Models
 	public class WorkItemFields
 	{
 		[JsonProperty(PropertyName = "System.State")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		public WorkItemState State { get; set; }
+		//[JsonConverter(typeof(StringEnumConverter))]
+		public string State { get; set; }
 
 		[JsonProperty(PropertyName = "System.WorkItemType")]
 		[JsonConverter(typeof(StringEnumConverter))]

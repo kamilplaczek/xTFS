@@ -5,6 +5,7 @@
 			 Title="Work item details"
 			 xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
 			 BindingContext="{Binding Source={StaticResource Locator}, Path=WorkItemDetails}"
+			 xmlns:c="clr-namespace:xTFS.Controls;assembly=xTFS"
 			 xmlns:v="clr-namespace:xTFS.Views;assembly=xTFS"
              x:Class="xTFS.Views.WorkItemDetailsPage">
   <Grid>
@@ -43,7 +44,7 @@
 		  <RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<Label Text="{i18n:TranslateExtension AssignedToLabel}" Grid.Row="0"></Label>
-		<Picker Grid.Row="1"></Picker>
+		<c:BindablePicker ItemsSource="{Binding TeamMembers}" SelectedItem="{Binding SelectedTeamMember}" Grid.Row="1"></c:BindablePicker>
 	  </Grid>
 	  <Grid Grid.Row="3">
 		<Grid.RowDefinitions>
@@ -51,7 +52,7 @@
 		  <RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<Label Text="{i18n:TranslateExtension IterationLabel}" Grid.Row="0"></Label>
-		<Picker Grid.Row="1"></Picker>
+		<c:BindablePicker ItemsSource="{Binding Iterations}" SelectedItem="{Binding SelectedIteration}" Grid.Row="1"></c:BindablePicker>
 	  </Grid>
 	  <Grid Grid.Row="4">
 		<Grid.RowDefinitions>
@@ -59,7 +60,7 @@
 		  <RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<Label Text="{i18n:TranslateExtension StateLabel}" Grid.Row="0"></Label>
-		<Picker Grid.Row="1"></Picker>
+		<c:BindablePicker ItemsSource="{Binding WorkItemStates}" SelectedItem="{Binding SelectedState}" Grid.Row="1"></c:BindablePicker>
 	  </Grid>
 	  <Grid Grid.Row="5">
 		<Grid.RowDefinitions>

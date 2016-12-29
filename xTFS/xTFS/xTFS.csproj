@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="Behaviors\BindableBehavior.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Controls\BindablePicker.cs" />
     <Compile Include="Converters\ItemTappedConverter.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\Locator.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Rest\Models\Iteration.cs" />
     <Compile Include="Rest\Models\IterationAttributes.cs" />
     <Compile Include="Rest\Models\Project.cs" />
+    <Compile Include="Rest\Models\TeamMember.cs" />
     <Compile Include="Rest\Models\WIQLResponse.cs" />
     <Compile Include="Rest\Models\Team.cs" />
     <Compile Include="Rest\Models\ProjectDetails.cs" />
@@ -171,6 +173,9 @@
     <Reference Include="RestSharp.Portable.HttpClient, Version=3.3.0.0, Culture=neutral, PublicKeyToken=be81bb0f53eab22f, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FubarCoder.RestSharp.Portable.HttpClient.3.3.0\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\RestSharp.Portable.HttpClient.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5.1\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Net.Http.2.2.28\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll</HintPath>

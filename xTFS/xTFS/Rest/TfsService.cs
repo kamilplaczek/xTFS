@@ -29,6 +29,12 @@ namespace xTFS.Rest
 			return result;
 		}
 
+		public async Task<CollectionResponse<TeamMember>> GetTeamMembers(string project, string team)
+		{
+			var result = await ExecuteRequest<CollectionResponse<TeamMember>>($"DefaultCollection/_apis/projects/{project}/teams/{team}/members/?api-version=2.2", Method.GET);
+			return result;
+		}
+
 		public async Task<CollectionResponse<Iteration>> GetIterations(string projectId, string teamId)
 		{
 			var result = await ExecuteRequest<CollectionResponse<Iteration>>($"DefaultCollection/{projectId}/{teamId}/_apis/work/teamsettings/iterations?api-version=v2.0-preview", Method.GET);
