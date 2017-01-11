@@ -112,7 +112,8 @@ namespace xTFS.ViewModels
 				IsBusy = true;
 				var ids = await _tfsService.GetWorkItemIdsByIteration(_project.Name, iteration.Name);
 				MessagingCenter.Send(this, Messages.SetIterationMessage, ids);
-				_navService.NavigateTo(Locator.WorkItemsListPage);
+				// hide master page (iterations list)
+				MessagingCenter.Send(this, Messages.SetIterationsListPresentedMessage, false);
 			}
 			catch (ServiceException e)
 			{

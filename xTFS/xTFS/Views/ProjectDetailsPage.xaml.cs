@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using xTFS.Helpers;
+using xTFS.ViewModels;
 
 namespace xTFS.Views
 {
@@ -13,6 +15,10 @@ namespace xTFS.Views
 		public ProjectDetailsPage()
 		{
 			InitializeComponent();
+			MessagingCenter.Subscribe<IterationsListViewModel, bool>(this, Messages.SetIterationsListPresentedMessage, (sender, present) =>
+			{
+				IsPresented = present;
+			});
 		}
 	}
 }

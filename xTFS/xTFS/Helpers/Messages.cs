@@ -13,5 +13,6 @@ namespace xTFS.Helpers
 		public const string SetIterationMessage = "SetIteration";
 		public const string SetWorkItemMessage = "SetWorkItem";
 		public const string SignInMessage = "SignIn";
+		public const string SetIterationsListPresentedMessage = "SetIterationsListPresented";
 	}
 }
