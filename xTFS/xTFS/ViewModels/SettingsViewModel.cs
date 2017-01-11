@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using xTFS.Helpers;
 using xTFS.Navigation;
+using xTFS.Services;
 
 namespace xTFS.ViewModels
 {
@@ -50,7 +51,7 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public SettingsViewModel(IExtNavigationService navService) : base(navService)
+		public SettingsViewModel(IExtNavigationService navService, IPopupService popupService) : base(navService, popupService)
 		{
 			Address = Settings.TfsAddress;
 		}

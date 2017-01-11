@@ -11,7 +11,9 @@ using Xamarin.Forms;
 using xTFS.Helpers;
 using xTFS.Navigation;
 using xTFS.Rest;
+using xTFS.Rest.Exceptions;
 using xTFS.Rest.Models;
+using xTFS.Services;
 
 namespace xTFS.ViewModels
 {
@@ -68,7 +70,7 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public IterationsListViewModel(ITfsService tfsService, IExtNavigationService navService) : base(navService)
+		public IterationsListViewModel(ITfsService tfsService, IExtNavigationService navService, IPopupService popupService) : base(navService, popupService)
 		{
 			_tfsService = tfsService;
 			MessagingCenter.Subscribe<ProjectsListViewModel, Project>(this, Messages.SetProjectMessage, async (sender, args) =>
@@ -79,23 +81,47 @@ namespace xTFS.ViewModels
 
 		private async Task GetProjectDetails(string id)
 		{
-			Project = await _tfsService.GetProject(id);
-			var iterations = await _tfsService.GetIterations(id, _project.DefaultTeam.Id);
-			if (iterations.Value.Any())
+			try
 			{
-				Iterations = new ObservableCollection<Iteration>(iterations.Value);
-				var now = DateTime.Now;
-				var selectedIteration = Iterations.FirstOrDefault(i => i.Attributes.StartDate.HasValue && i.Attributes.StartDate.Value <= now
-					&& i.Attributes.EndDate.HasValue && i.Attributes.EndDate.Value >= now) ?? Iterations.First();
-				await SetIteration(selectedIteration);
+				IsBusy = true;
+				Project = await _tfsService.GetProject(id);
+				var iterations = await _tfsService.GetIterations(id, _project.DefaultTeam.Id);
+				if (iterations.Value.Any())
+				{
+					Iterations = new ObservableCollection<Iteration>(iterations.Value);
+					var now = DateTime.Now;
+					var selectedIteration = Iterations.FirstOrDefault(i => i.Attributes.StartDate.HasValue && i.Attributes.StartDate.Value <= now
+						&& i.Attributes.EndDate.HasValue && i.Attributes.EndDate.Value >= now) ?? Iterations.First();
+					await SetIteration(selectedIteration);
+				}
+			}
+			catch (ServiceException e)
+			{
+				HandleServiceException(e);
+			}
+			finally
+			{
+				IsBusy = false;
 			}
 		}
 
 		private async Task SetIteration(Iteration iteration)
 		{
-			var ids = await _tfsService.GetWorkItemIdsByIteration(_project.Name, iteration.Name);
-			MessagingCenter.Send(this, Messages.SetIterationMessage, ids);
-			_navService.NavigateTo(Locator.WorkItemsListPage);
+			try
+			{
+				IsBusy = true;
+				var ids = await _tfsService.GetWorkItemIdsByIteration(_project.Name, iteration.Name);
+				MessagingCenter.Send(this, Messages.SetIterationMessage, ids);
+				_navService.NavigateTo(Locator.WorkItemsListPage);
+			}
+			catch (ServiceException e)
+			{
+				HandleServiceException(e);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
 		}
 	}
 }

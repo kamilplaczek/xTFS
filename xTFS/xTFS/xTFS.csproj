@@ -68,6 +68,7 @@
     <Compile Include="Rest\Exceptions\ServiceException.cs" />
     <Compile Include="Rest\ITfsService.cs" />
     <Compile Include="Rest\Models\CollectionResponse.cs" />
+    <Compile Include="Rest\Models\Error.cs" />
     <Compile Include="Rest\Models\Iteration.cs" />
     <Compile Include="Rest\Models\IterationAttributes.cs" />
     <Compile Include="Rest\Models\Project.cs" />

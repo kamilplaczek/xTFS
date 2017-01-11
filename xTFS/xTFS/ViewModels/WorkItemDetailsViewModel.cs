@@ -12,7 +12,9 @@ using xTFS.Helpers;
 using xTFS.Navigation;
 using xTFS.Rest;
 using xTFS.Rest.Enums;
+using xTFS.Rest.Exceptions;
 using xTFS.Rest.Models;
+using xTFS.Services;
 
 namespace xTFS.ViewModels
 {
@@ -20,6 +22,7 @@ namespace xTFS.ViewModels
 	{
 		private readonly ITfsService _tfsService;
 
+		private string _projectName;
 		private WorkItem _workItem;
 		private ObservableCollection<string> _teamMembers;
 		private ObservableCollection<string> _iterations;
@@ -134,35 +137,67 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public WorkItemDetailsViewModel(ITfsService tfsService, IExtNavigationService navService) : base(navService)
+		public WorkItemDetailsViewModel(ITfsService tfsService, IExtNavigationService navService, IPopupService popupService) : base(navService, popupService)
 		{
 			_tfsService = tfsService;
 			MessagingCenter.Subscribe<WorkItemsListViewModel, WorkItem>(this, Messages.SetWorkItemMessage, async (sender, args) =>
 			{
-				await GetWorkItemDetails(args);
+				await InitForm();
+				await SetWorkItemDetails(args);
 			});
 		}
 
-		private async Task GetWorkItemDetails(WorkItem item)
+		private async Task SetWorkItemDetails(WorkItem item)
 		{
-			// TODO: possibly refactor for cleaner way to get project context
-			var project = SimpleIoc.Default.GetInstance<IterationsListViewModel>()?.Project;
-			if (project != null)
+			try
 			{
-				var iterations = await _tfsService.GetIterations(project.Id, project.DefaultTeam.Id);
-				var teamMembers = await _tfsService.GetTeamMembers(project.Id, project.DefaultTeam.Id);
-				TeamMembers = new ObservableCollection<string>(teamMembers.Value.Select(m => m.DisplayName));
-				Iterations = new ObservableCollection<string>(iterations.Value.Select(i => $"{project.Name}\\{i.Name}"));
-				WorkItemStates = new ObservableCollection<string>(GetEnumMemberValues(typeof(WorkItemState)));
-				WorkItem = await _tfsService.GetWorkItemDetails(item.Id);
-				SelectedIteration = Iterations.FirstOrDefault(i => i == WorkItem.Fields.Iteration);
-				SelectedTeamMember = TeamMembers.FirstOrDefault(m => WorkItem.Fields.AssignedTo.Contains(m));
-				SelectedState = WorkItemStates.FirstOrDefault(s => s == WorkItem.Fields.State);
+				if (item.Id != 0)
+				{
+					item = await _tfsService.GetWorkItemDetails(item.Id);
+					SelectedIteration = Iterations.FirstOrDefault(i => i == item.Fields.Iteration);
+					SelectedTeamMember = TeamMembers.FirstOrDefault(m => item.Fields.AssignedTo.Contains(m));
+					SelectedState = WorkItemStates.FirstOrDefault(s => s == item.Fields.State);
+				}
+				WorkItem = item;
 			}
-			else
+			catch (ServiceException e)
 			{
-				// something went terribly wrong - invalid app state
-				GoBack();
+				HandleServiceException(e);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+
+		private async Task InitForm()
+		{
+			try
+			{
+				IsBusy = true;
+				var project = SimpleIoc.Default.GetInstance<IterationsListViewModel>()?.Project;
+				if (project != null)
+				{
+					_projectName = project.Name;
+					var iterations = await _tfsService.GetIterations(project.Id, project.DefaultTeam.Id);
+					var teamMembers = await _tfsService.GetTeamMembers(project.Id, project.DefaultTeam.Id);
+					TeamMembers = new ObservableCollection<string>(teamMembers.Value.Select(m => m.DisplayName));
+					Iterations = new ObservableCollection<string>(iterations.Value.Select(i => $"{project.Name}\\{i.Name}"));
+					WorkItemStates = new ObservableCollection<string>(GetEnumMemberValues(typeof(WorkItemState)));
+				}
+				else
+				{
+					// something went terribly wrong - invalid app state
+					GoBack();
+				}
+			}
+			catch (ServiceException e)
+			{
+				HandleServiceException(e);
+			}
+			finally
+			{
+				IsBusy = false;
 			}
 		}
 
@@ -210,8 +245,27 @@ namespace xTFS.ViewModels
 					Path = GetWorkItemPatchPath(nameof(fields.AssignedTo))
 				});
 			}
-			var result = await _tfsService.UpdateWorkItem(item.Id, patches);
-			GoBack();
+			try
+			{
+				WorkItem result;
+				if (_workItem.Id != 0)
+				{
+					result = await _tfsService.UpdateWorkItem(item.Id, patches);
+				}
+				else
+				{
+					result = await _tfsService.CreateTask(_projectName, patches);
+				}
+				GoBack();
+			}
+			catch (ServiceException e)
+			{
+				HandleServiceException(e);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
 		}
 
 		private string GetWorkItemPatchPath(string member)

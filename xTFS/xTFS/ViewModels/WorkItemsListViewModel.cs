@@ -11,7 +11,9 @@ using Xamarin.Forms;
 using xTFS.Helpers;
 using xTFS.Navigation;
 using xTFS.Rest;
+using xTFS.Rest.Exceptions;
 using xTFS.Rest.Models;
+using xTFS.Services;
 
 namespace xTFS.ViewModels
 {
@@ -44,18 +46,51 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public WorkItemsListViewModel(ITfsService tfsService, IExtNavigationService navService) : base(navService)
+		public ICommand CreateWorkItemCommand
+		{
+			get
+			{
+				return new RelayCommand(() =>
+				{
+					_navService.NavigateTo(Locator.WorkItemDetailsPage);
+					var model = new WorkItem()
+					{
+						Fields = new WorkItemFields()
+					};
+					MessagingCenter.Send(this, Messages.SetWorkItemMessage, model);
+				});
+			}
+		}
+
+		public WorkItemsListViewModel(ITfsService tfsService, IExtNavigationService navService, IPopupService popupService) : base(navService, popupService)
 		{
 			_tfsService = tfsService;
-			MessagingCenter.Subscribe<IterationsListViewModel, IEnumerable<int>>(this, Messages.SetIterationMessage, async (sender, args) => {
+			MessagingCenter.Subscribe<IterationsListViewModel, IEnumerable<int>>(this, Messages.SetIterationMessage, async (sender, args) =>
+			{
+				if (WorkItems != null)
+				{
+					WorkItems.Clear();
+				}
 				await GetWorkItems(args);
 			});
 		}
 
 		private async Task GetWorkItems(IEnumerable<int> ids)
 		{
-			var workItems = await _tfsService.GetWorkItems(ids);
-			WorkItems = new ObservableCollection<WorkItem>(workItems.Value);
+			try
+			{
+				IsBusy = true;
+				var workItems = await _tfsService.GetWorkItems(ids);
+				WorkItems = new ObservableCollection<WorkItem>(workItems.Value);
+			}
+			catch (ServiceException e)
+			{
+				HandleServiceException(e);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
 		}
 	}
 }

@@ -8,10 +8,10 @@
              x:Class="xTFS.Views.WorkItemsListPage">
   <Grid>
 	<Grid.RowDefinitions>
-	  <RowDefinition Height="Auto"></RowDefinition>
 	  <RowDefinition Height="*"></RowDefinition>
+	  <RowDefinition Height="Auto"></RowDefinition>
 	</Grid.RowDefinitions>
-	<ListView ItemsSource="{Binding WorkItems}" Grid.Row="1">
+	<ListView ItemsSource="{Binding WorkItems}" Grid.Row="0">
 	  <ListView.Behaviors>
 		<b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectWorkItemCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
 	  </ListView.Behaviors>
@@ -34,5 +34,6 @@
 		</DataTemplate>
 	  </ListView.ItemTemplate>
 	</ListView>
+	<iconize:IconButton FontSize="24" Text="fa-plus-square" Command="{Binding CreateWorkItemCommand}" Grid.Row="1"></iconize:IconButton>
   </Grid>
 </v:BasePage>

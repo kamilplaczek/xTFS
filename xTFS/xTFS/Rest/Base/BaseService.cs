@@ -1,4 +1,5 @@
-﻿using RestSharp.Portable;
+﻿using Newtonsoft.Json;
+using RestSharp.Portable;
 using RestSharp.Portable.Authenticators;
 using RestSharp.Portable.Deserializers;
 using RestSharp.Portable.HttpClient;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using xTFS.Rest.Base;
 using xTFS.Rest.Exceptions;
+using xTFS.Rest.Models;
 
 namespace xTFS.Rest
 {
@@ -20,6 +22,7 @@ namespace xTFS.Rest
 		public BaseService()
 		{
 			_restClient.AddHandler("application/json", new JsonNetDeserializer());
+			_restClient.IgnoreResponseStatusCode = true;
 		}
 
 		public void Dispose()
@@ -36,9 +39,10 @@ namespace xTFS.Rest
 		protected async Task<T> ExecuteRequest<T>(string url, Method method, object body = null, string contentType = "application/json")
 		{
 			var request = CreateRequest(url, method, body, contentType);
-			var result = await _restClient.Execute<T>(request);
+			var result = await _restClient.Execute(request);
 			HandleResult(result);
-			return result.Data;
+			var data = JsonConvert.DeserializeObject<T>(result.Content);
+			return data;
 		}
 
 		private RestRequest CreateRequest(string url, Method method, object body, string contentType)
@@ -56,11 +60,25 @@ namespace xTFS.Rest
 		{
 			if (result.StatusCode != HttpStatusCode.OK)
 			{
-				if (result.RawBytes != null && result.RawBytes.Any())
+				ServiceException exception;
+				if (!string.IsNullOrEmpty(result.Content))
 				{
-					throw new ServiceException(Encoding.UTF8.GetString(result.RawBytes, 0, result.RawBytes.Length));
+					try
+					{
+						// try retrieve error messages collection
+						var error = JsonConvert.DeserializeObject<Error>(result.Content);
+						exception = new ServiceException(error.Value.Message);
+					}
+					catch (Exception)
+					{
+						exception = new ServiceException(result.StatusCode);
+					}
 				}
-				throw new ServiceException(result.StatusCode);
+				else
+				{
+					exception = new ServiceException(result.StatusCode);
+				}
+				throw exception;
 			}
 		}
 	}

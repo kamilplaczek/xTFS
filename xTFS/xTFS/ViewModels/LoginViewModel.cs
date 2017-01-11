@@ -82,9 +82,8 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public LoginViewModel(IExtNavigationService navService, IPopupService popupService, ITfsService tfsService) : base(navService)
+		public LoginViewModel(IExtNavigationService navService, IPopupService popupService, ITfsService tfsService) : base(navService, popupService)
 		{
-			_popupService = popupService;
 			_tfsService = tfsService;
 			MessagingCenter.Subscribe<App>(this, Messages.SignInMessage, async (sender) =>
 			{
@@ -101,6 +100,7 @@ namespace xTFS.ViewModels
 			// retrieve projects list and check if credentials are valid
 			try
 			{
+				IsBusy = true;
 				var projects = await _tfsService.GetProjects();
 				// login successful - store username and password
 				Settings.Username = username;
@@ -110,7 +110,11 @@ namespace xTFS.ViewModels
 			}
 			catch (ServiceException e)
 			{
-				// handle
+				HandleServiceException(e);
+			}
+			finally
+			{
+				IsBusy = false;
 			}
 		}
 	}

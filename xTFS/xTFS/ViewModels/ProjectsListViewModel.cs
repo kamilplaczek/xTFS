@@ -12,6 +12,7 @@ using xTFS.Helpers;
 using xTFS.Navigation;
 using xTFS.Resources;
 using xTFS.Rest;
+using xTFS.Rest.Exceptions;
 using xTFS.Rest.Models;
 using xTFS.Services;
 
@@ -20,7 +21,6 @@ namespace xTFS.ViewModels
 	public class ProjectsListViewModel : BaseViewModel
 	{
 		private readonly ITfsService _tfsService;
-		private readonly IPopupService _popupService;
 
 		private ObservableCollection<Project> _projects;
 
@@ -79,10 +79,9 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public ProjectsListViewModel(ITfsService tfsService, IPopupService popupService, IExtNavigationService navService) : base(navService)
+		public ProjectsListViewModel(ITfsService tfsService, IExtNavigationService navService, IPopupService popupService) : base(navService, popupService)
 		{
 			_tfsService = tfsService;
-			_popupService = popupService;
 			MessagingCenter.Subscribe<LoginViewModel, CollectionResponse<Project>>(this, Messages.SetProjectsListMessage, (sender, args) =>
 			{
 				Projects = new ObservableCollection<Project>(args.Value);
@@ -90,8 +89,20 @@ namespace xTFS.ViewModels
 		}
 		private async Task GetProjects()
 		{
-			var projects = await _tfsService.GetProjects();
-			Projects = new ObservableCollection<Project>(projects.Value);
+			try
+			{
+				IsBusy = true;
+				var projects = await _tfsService.GetProjects();
+				Projects = new ObservableCollection<Project>(projects.Value);
+			}
+			catch (ServiceException e)
+			{
+				HandleServiceException(e);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
 		}
 	}
 }

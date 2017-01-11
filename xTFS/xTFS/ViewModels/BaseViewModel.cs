@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using xTFS.Helpers;
 using xTFS.Navigation;
+using xTFS.Rest.Exceptions;
+using xTFS.Services;
 
 namespace xTFS.ViewModels
 {
 	public class BaseViewModel : ViewModelBase
 	{
 		protected readonly IExtNavigationService _navService;
+		protected readonly IPopupService _popupService;
 
 		private bool _isBusy;
 
@@ -29,9 +32,10 @@ namespace xTFS.ViewModels
 			}
 		}
 
-		public BaseViewModel(IExtNavigationService navService)
+		public BaseViewModel(IExtNavigationService navService, IPopupService popupService)
 		{
 			_navService = navService;
+			_popupService = popupService;
 		}
 
 		protected IEnumerable<string> GetEnumMemberValues(Type t)
@@ -43,6 +47,11 @@ namespace xTFS.ViewModels
 				return values;
 			}
 			return null;
+		}
+
+		protected void HandleServiceException(ServiceException e)
+		{
+			_popupService.DisplayAlert("Error", e.Message);
 		}
 	}
 }

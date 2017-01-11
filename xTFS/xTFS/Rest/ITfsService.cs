@@ -17,6 +17,7 @@ namespace xTFS.Rest
 		Task<CollectionResponse<WorkItem>> GetWorkItems(IEnumerable<int> ids);
 		Task<WorkItem> GetWorkItemDetails(int id);
 		Task<WorkItem> UpdateWorkItem(int id, IEnumerable<WorkItemPatch> patches);
+		Task<WorkItem> CreateTask(string project, IEnumerable<WorkItemPatch> patches);
 		Task<CollectionResponse<TeamMember>> GetTeamMembers(string project, string team);
 	}
 }

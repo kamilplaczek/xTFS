@@ -69,6 +69,12 @@ namespace xTFS.Rest
 			return result;
 		}
 
+		public async Task<WorkItem> CreateTask(string project, IEnumerable<WorkItemPatch> patches)
+		{
+			var result = await ExecuteRequest<WorkItem>($"DefaultCollection/{project}/_apis/wit/workitems/$Task?api-version=1.0", Method.PATCH, patches, "application/json-patch+json");
+			return result;
+		}
+
 		private async Task<WIQLResponse> GetWorkItemsByQuery(string project, string query)
 		{
 			var body = new WIQLRequest()
