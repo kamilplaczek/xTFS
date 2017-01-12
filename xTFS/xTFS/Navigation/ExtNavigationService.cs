@@ -42,7 +42,6 @@ namespace xTFS.Navigation
 		public void SetMainPage(string pageKey)
 		{
 			var page = GetPage(pageKey, null);
-			App.Current.MainPage = page;
 			var md = page as MasterDetailPage;
 			var navToSet = md?.Detail ?? page;
 			var nav = navToSet as NavigationPage;
@@ -50,6 +49,14 @@ namespace xTFS.Navigation
 			{
 				// wrap page in navigation page
 				nav = new NavigationPage(navToSet);
+			}
+			if (md != null)
+			{
+				App.Current.MainPage = md;
+			}
+			else
+			{
+				App.Current.MainPage = nav;
 			}
 			_navigation = nav;
 		}

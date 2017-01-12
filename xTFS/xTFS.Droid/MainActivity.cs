@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Plugin.Iconize.Fonts;
 
 namespace xTFS.Droid
 {
@@ -18,7 +19,7 @@ namespace xTFS.Droid
 			ToolbarResource = Resource.Layout.Toolbar;
 
 			base.OnCreate(bundle);
-
+			Plugin.Iconize.Iconize.With(new FontAwesomeModule());
 			global::Xamarin.Forms.Forms.Init(this, bundle);
 			LoadApplication(new App());
 		}

@@ -11,7 +11,7 @@
 	  <RowDefinition Height="*"></RowDefinition>
 	  <RowDefinition Height="Auto"></RowDefinition>
 	</Grid.RowDefinitions>
-	<ListView ItemsSource="{Binding WorkItems}" Grid.Row="0">
+	<ListView RowHeight="75" ItemsSource="{Binding WorkItems}" Grid.Row="0">
 	  <ListView.Behaviors>
 		<b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectWorkItemCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
 	  </ListView.Behaviors>

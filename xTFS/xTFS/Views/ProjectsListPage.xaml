@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
-			 Title="Projects"
+			 xmlns:i18n="clr-namespace:xTFS.Resources;assembly=xTFS"
+			 Title="{i18n:TranslateExtension ProjectsListPageTitle}"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BindingContext="{Binding Source={StaticResource Locator}, Path=ProjectsList}"
 			 xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
 			 xmlns:c="clr-namespace:xTFS.Converters;assembly=xTFS"
 			 xmlns:b="clr-namespace:xTFS.Behaviors;assembly=xTFS"
 			 xmlns:v="clr-namespace:xTFS.Views;assembly=xTFS"
              x:Class="xTFS.Views.ProjectsListPage">
-  <ListView IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshProjectsCommand}" ItemsSource="{Binding Projects}">
+  <ListView RowHeight="65" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshProjectsCommand}" ItemsSource="{Binding Projects}">
 	<ListView.Behaviors>
 	  <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectProjectCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
 	</ListView.Behaviors>

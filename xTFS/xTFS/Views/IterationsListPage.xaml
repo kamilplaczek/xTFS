@@ -13,7 +13,7 @@
 	  <RowDefinition Height="Auto"></RowDefinition>
 	</Grid.RowDefinitions>
 	<Label Margin="10" Text="{Binding Project.Name}" FontSize="24"></Label>
-	<ListView ItemsSource="{Binding Iterations}" Grid.Row="1">
+	<ListView RowHeight="55" ItemsSource="{Binding Iterations}" Grid.Row="1">
 	  <ListView.Behaviors>
 		<b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectIterationCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
 	  </ListView.Behaviors>

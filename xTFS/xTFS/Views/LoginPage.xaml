@@ -6,21 +6,29 @@
 			 xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BindingContext="{Binding Source={StaticResource Locator}, Path=Login}"
              x:Class="xTFS.Views.LoginPage">
-  <Grid VerticalOptions="Center" Margin="20">
+  <Grid VerticalOptions="Start" Margin="20">
 	<Grid.RowDefinitions>
-	  <RowDefinition Height="Auto" />
-	  <RowDefinition Height="Auto" />
-	  <RowDefinition Height="Auto" />
-	  <RowDefinition Height="Auto" />
-	  <RowDefinition Height="Auto" />
-	  <RowDefinition Height="Auto" />
+	  <RowDefinition Height="100" />
+	  <RowDefinition Height="*" />
 	</Grid.RowDefinitions>
-
-	<Label Text="{i18n:TranslateExtension UsernameLabel}" Grid.Row="0"></Label>
-	<Entry Text="{Binding Login}" Grid.Row="1"></Entry>
-	<Label Text="{i18n:TranslateExtension PasswordLabel}" Grid.Row="2"></Label>
-	<Entry IsPassword="true" Text="{Binding Password}" Grid.Row="3"></Entry>
-	<Button Text="{i18n:TranslateExtension LoginButton}"   Command="{Binding LoginCommand}" Grid.Row="4"></Button>
-	<iconize:IconButton Text="fa-gears" Command="{Binding SettingsCommand}"  Grid.Row="5"></iconize:IconButton>
+	<Image HorizontalOptions="Center" Aspect="AspectFit" Source="logo.png" />
+	<ScrollView Grid.Row="1">
+	  <Grid>
+		<Grid.RowDefinitions>
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Label Text="{i18n:TranslateExtension UsernameLabel}" Grid.Row="0"></Label>
+		<Entry Text="{Binding Login}" Grid.Row="1"></Entry>
+		<Label Text="{i18n:TranslateExtension PasswordLabel}" Grid.Row="2"></Label>
+		<Entry IsPassword="true" Text="{Binding Password}" Grid.Row="3"></Entry>
+		<Button HorizontalOptions="Center" Text="{i18n:TranslateExtension LoginButton}"   Command="{Binding LoginCommand}" Grid.Row="4"></Button>
+		<iconize:IconButton HorizontalOptions="Center" Text="fa-gears" Command="{Binding SettingsCommand}"  Grid.Row="5"></iconize:IconButton>
+	  </Grid>
+	</ScrollView>
   </Grid>
 </v:BasePage>
