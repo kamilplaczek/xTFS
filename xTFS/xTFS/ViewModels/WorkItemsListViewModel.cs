@@ -65,7 +65,7 @@ namespace xTFS.ViewModels
 		public WorkItemsListViewModel(ITfsService tfsService, IExtNavigationService navService, IPopupService popupService) : base(navService, popupService)
 		{
 			_tfsService = tfsService;
-			MessagingCenter.Subscribe<IterationsListViewModel, IEnumerable<int>>(this, Messages.SetIterationMessage, async (sender, args) =>
+			MessagingCenter.Subscribe<IterationsListViewModel, IEnumerable<int>>(this, Messages.SetWorkItemsListMessage, async (sender, args) =>
 			{
 				if (WorkItems != null)
 				{

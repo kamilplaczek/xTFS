@@ -327,6 +327,7 @@ namespace xTFS.ViewModels
 				{
 					result = await _tfsService.CreateWorkItem(_projectName, _selectedWorkItemType, patches);
 				}
+				MessagingCenter.Send(this, Messages.SetIterationMessage, _selectedIteration);
 				GoBack();
 			}
 			catch (ServiceException e)

@@ -77,6 +77,14 @@ namespace xTFS.ViewModels
 			{
 				await GetProjectDetails(args.Id);
 			});
+			MessagingCenter.Subscribe<WorkItemDetailsViewModel, string>(this, Messages.SetIterationMessage, async (sender, name) =>
+			{
+				var iteration = _iterations.FirstOrDefault(i => i.Name.Contains(name) || name.Contains(i.Name));
+				if (iteration != null)
+				{
+					await SetIteration(iteration);
+				}
+			});
 		}
 
 		private async Task GetProjectDetails(string id)
@@ -111,7 +119,7 @@ namespace xTFS.ViewModels
 			{
 				IsBusy = true;
 				var ids = await _tfsService.GetWorkItemIdsByIteration(_project.Name, iteration.Name);
-				MessagingCenter.Send(this, Messages.SetIterationMessage, ids);
+				MessagingCenter.Send(this, Messages.SetWorkItemsListMessage, ids);
 				// hide master page (iterations list)
 				MessagingCenter.Send(this, Messages.SetIterationsListPresentedMessage, false);
 			}
