@@ -27,9 +27,26 @@ namespace xTFS.ViewModels
 		private ObservableCollection<string> _teamMembers;
 		private ObservableCollection<string> _iterations;
 		private ObservableCollection<string> _workItemStates;
+		private ObservableCollection<string> _workItemTypes;
 		private string _selectedTeamMember;
 		private string _selectedIteration;
 		private string _selectedState;
+		private string _selectedWorkItemType;
+		private bool _isWorkItemStatePickerEnabled;
+		private bool _isWorkItemTypePickerVisible;
+
+		public ObservableCollection<string> WorkItemTypes
+		{
+			get
+			{
+				return _workItemTypes;
+			}
+			set
+			{
+				Set(ref _workItemTypes, value);
+				IsWorkItemTypePickerVisible = _workItemTypes != null && _workItemTypes.Any();
+			}
+		}
 
 		public ObservableCollection<string> WorkItemStates
 		{
@@ -40,6 +57,7 @@ namespace xTFS.ViewModels
 			set
 			{
 				Set(ref _workItemStates, value);
+				IsWorkItemStatePickerEnabled = _workItemStates != null && _workItemStates.Any();
 			}
 		}
 
@@ -52,6 +70,45 @@ namespace xTFS.ViewModels
 			set
 			{
 				Set(ref _selectedTeamMember, value);
+			}
+		}
+
+		public string SelectedWorkItemType
+		{
+			get
+			{
+				return _selectedWorkItemType;
+			}
+			set
+			{
+				if (Set(ref _selectedWorkItemType, value))
+				{
+					var type = _selectedWorkItemType == WorkItemType.Task.ToString() ? typeof(TaskState) : typeof(PBIState);
+					WorkItemStates = new ObservableCollection<string>(GetEnumMemberValues(type));
+				}
+			}
+		}
+		public bool IsWorkItemStatePickerEnabled
+		{
+			get
+			{
+				return _isWorkItemStatePickerEnabled;
+			}
+			set
+			{
+				Set(ref _isWorkItemStatePickerEnabled, value);
+			}
+		}
+
+		public bool IsWorkItemTypePickerVisible
+		{
+			get
+			{
+				return _isWorkItemTypePickerVisible;
+			}
+			set
+			{
+				Set(ref _isWorkItemTypePickerVisible, value);
 			}
 		}
 
@@ -154,9 +211,24 @@ namespace xTFS.ViewModels
 				if (item.Id != 0)
 				{
 					item = await _tfsService.GetWorkItemDetails(item.Id);
+					if (item.Fields.WorkItemType == WorkItemType.Task)
+					{
+						WorkItemStates = new ObservableCollection<string>(GetEnumMemberValues(typeof(TaskState)));
+					}
+					else
+					{
+						WorkItemStates = new ObservableCollection<string>(GetEnumMemberValues(typeof(PBIState)));
+					}
 					SelectedIteration = Iterations.FirstOrDefault(i => i == item.Fields.Iteration);
-					SelectedTeamMember = TeamMembers.FirstOrDefault(m => item.Fields.AssignedTo.Contains(m));
+					if (!string.IsNullOrEmpty(item.Fields.AssignedTo))
+					{
+						SelectedTeamMember = TeamMembers.FirstOrDefault(m => item.Fields.AssignedTo.Contains(m));
+					}
 					SelectedState = WorkItemStates.FirstOrDefault(s => s == item.Fields.State);
+				}
+				else
+				{
+					WorkItemTypes = new ObservableCollection<string>(GetEnumMemberValues(typeof(WorkItemType)));
 				}
 				WorkItem = item;
 			}
@@ -183,7 +255,6 @@ namespace xTFS.ViewModels
 					var teamMembers = await _tfsService.GetTeamMembers(project.Id, project.DefaultTeam.Id);
 					TeamMembers = new ObservableCollection<string>(teamMembers.Value.Select(m => m.DisplayName));
 					Iterations = new ObservableCollection<string>(iterations.Value.Select(i => $"{project.Name}\\{i.Name}"));
-					WorkItemStates = new ObservableCollection<string>(GetEnumMemberValues(typeof(WorkItemState)));
 				}
 				else
 				{
@@ -254,7 +325,7 @@ namespace xTFS.ViewModels
 				}
 				else
 				{
-					result = await _tfsService.CreateTask(_projectName, patches);
+					result = await _tfsService.CreateWorkItem(_projectName, _selectedWorkItemType, patches);
 				}
 				GoBack();
 			}
@@ -278,6 +349,9 @@ namespace xTFS.ViewModels
 			SelectedTeamMember = null;
 			SelectedIteration = null;
 			SelectedState = null;
+			SelectedWorkItemType = null;
+			WorkItemTypes = null;
+			WorkItemStates = null;
 			_navService.GoBack();
 		}
 	}

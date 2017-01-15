@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Plugin.Iconize.Fonts;
 
 namespace xTFS.iOS
 {
@@ -22,7 +23,11 @@ namespace xTFS.iOS
 		//
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
+			Plugin.Iconize.Iconize.With(new FontAwesomeModule());
+
 			global::Xamarin.Forms.Forms.Init();
+			FormsPlugin.Iconize.iOS.IconControls.Init();
+
 			LoadApplication(new App());
 
 			return base.FinishedLaunching(app, options);

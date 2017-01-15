@@ -7,12 +7,26 @@ using System.Threading.Tasks;
 
 namespace xTFS.Rest.Enums
 {
-	public enum WorkItemState
+	public enum TaskState
 	{
 		[EnumMember(Value = "In Progress")]
 		InProgress,
 		[EnumMember(Value = "To Do")]
 		ToDo,
+		[EnumMember(Value = "Removed")]
+		Removed,
+		[EnumMember(Value = "Done")]
+		Done
+	}
+
+	public enum PBIState
+	{
+		[EnumMember(Value = "Approved")]
+		Approved,
+		[EnumMember(Value = "Committed")]
+		Commited,
+		[EnumMember(Value = "New")]
+		New,
 		[EnumMember(Value = "Removed")]
 		Removed,
 		[EnumMember(Value = "Done")]

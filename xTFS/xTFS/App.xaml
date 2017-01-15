@@ -2,12 +2,41 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"  xmlns:vm="clr-namespace:xTFS.ViewModels"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="xTFS.App" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:c="clr-namespace:xTFS.Converters;assembly=xTFS"
-			 d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+			 xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
   <Application.Resources>
 	<!-- Application resource dictionary -->
 	<ResourceDictionary>
-	  <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True"  />
+	  <vm:ViewModelLocator x:Key="Locator" />
 	  <c:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
+	  <c:WorkItemToIconConverter x:Key="WorkItemToIconConverter" />
+	  <Style x:Key="WorkItemIconStyle" TargetType="Label">
+		<Setter Property="Margin" Value="10" />
+		<Setter Property="FontSize" Value="30" />
+	  </Style>
+	  <Style x:Key="TaskNotDoneIconStyle" TargetType="Label" BasedOn="{StaticResource WorkItemIconStyle}">
+		<Setter Property="Text" Value="fa-square-o" />
+		<Setter Property="TextColor" Value="#F2CB1D" />
+	  </Style>
+	  <Style x:Key="TaskDoneIconStyle" TargetType="Label" BasedOn="{StaticResource WorkItemIconStyle}">
+		<Setter Property="Text" Value="fa-square" />
+		<Setter Property="TextColor" Value="#F2CB1D" />
+	  </Style>
+	  <Style x:Key="PBINotDoneIconStyle" TargetType="Label" BasedOn="{StaticResource WorkItemIconStyle}">
+		<Setter Property="Text" Value="fa-square-o" />
+		<Setter Property="TextColor" Value="#009CCC" />
+	  </Style>
+	  <Style x:Key="PBIDoneIconStyle" TargetType="Label" BasedOn="{StaticResource WorkItemIconStyle}">
+		<Setter Property="Text" Value="fa-square" />
+		<Setter Property="TextColor" Value="#009CCC" />
+	  </Style>
+	  <Style x:Key="BugNotDoneIconStyle" TargetType="Label" BasedOn="{StaticResource WorkItemIconStyle}">
+		<Setter Property="Text" Value="fa-square-o" />
+		<Setter Property="TextColor" Value="#CC293D" />
+	  </Style>
+	  <Style x:Key="BugDoneIconStyle" TargetType="Label" BasedOn="{StaticResource WorkItemIconStyle}">
+		<Setter Property="Text" Value="fa-square" />
+		<Setter Property="TextColor" Value="#CC293D" />
+	  </Style>
 	</ResourceDictionary>
   </Application.Resources>
 </Application>

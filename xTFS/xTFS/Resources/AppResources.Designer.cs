@@ -240,5 +240,14 @@ namespace xTFS.Resources {
                 return ResourceManager.GetString("UsernameLabel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work item type.
+        /// </summary>
+        internal static string WorkItemTypeLabel {
+            get {
+                return ResourceManager.GetString("WorkItemTypeLabel", resourceCulture);
+            }
+        }
     }
 }

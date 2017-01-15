@@ -177,4 +177,7 @@
   <data name="UsernameLabel" xml:space="preserve">
     <value>Username</value>
   </data>
+  <data name="WorkItemTypeLabel" xml:space="preserve">
+    <value>Work item type</value>
+  </data>
 </root>

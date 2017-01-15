@@ -20,12 +20,16 @@
 		  <ViewCell>
 			<StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
 			  <StackLayout Margin="10" Orientation="Horizontal" VerticalOptions="End">
-				<iconize:IconLabel Text="fa-square-o" FontSize="30" Margin ="10"/>
+				<!--<iconize:IconLabel Text="fa-square-o" FontSize="30" Margin ="10"/>-->
+				<iconize:IconLabel Style="{Binding ., Converter={StaticResource WorkItemToIconConverter}"/>
 				<StackLayout Orientation="Vertical">
 				  <Label Text="{Binding Fields.Title}" FontSize="20"/>
 				  <StackLayout Orientation="Horizontal">
 					<Label Text="{Binding Fields.State}" />
-					<Label Margin="5,0,0,0" Text="{Binding Fields.CreatedBy}" />
+					<Label Margin="2,0,2,0" Text="|" />
+					<Label Text="{Binding Fields.WorkItemType}" />
+					<Label Margin="2,0,2,0" Text="|" />
+					<Label Text="{Binding Fields.AssignedTo}" />
 				  </StackLayout>
 				</StackLayout>
 			  </StackLayout>

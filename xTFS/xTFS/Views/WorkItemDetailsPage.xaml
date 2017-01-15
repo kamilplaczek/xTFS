@@ -21,6 +21,7 @@
 		<RowDefinition Height="Auto" />
 		<RowDefinition Height="Auto" />
 		<RowDefinition Height="Auto" />
+		<RowDefinition Height="Auto" />
 	  </Grid.RowDefinitions>
 	  <Grid Grid.Row="0">
 		<Grid.RowDefinitions>
@@ -36,7 +37,11 @@
 		  <RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<Label Text="{i18n:TranslateExtension DescriptionLabel}" Grid.Row="0"></Label>
-		<Editor Text="{Binding WorkItem.Fields.Description}" HeightRequest="100" Grid.Row="1"></Editor>
+		<Editor Text="{Binding WorkItem.Fields.Description}" HeightRequest="100" Grid.Row="1">
+		  <Editor.BackgroundColor>
+			<OnPlatform x:TypeArguments="Color" iOS="#F7F7F7"></OnPlatform>
+		  </Editor.BackgroundColor>
+		</Editor>
 	  </Grid>
 	  <Grid Grid.Row="2">
 		<Grid.RowDefinitions>
@@ -54,15 +59,23 @@
 		<Label Text="{i18n:TranslateExtension IterationLabel}" Grid.Row="0"></Label>
 		<c:BindablePicker ItemsSource="{Binding Iterations}" SelectedItem="{Binding SelectedIteration}" Grid.Row="1"></c:BindablePicker>
 	  </Grid>
-	  <Grid Grid.Row="4">
+	  <Grid IsVisible="{Binding IsWorkItemTypePickerVisible}" Grid.Row="4">
+		<Grid.RowDefinitions>
+		  <RowDefinition Height="Auto" />
+		  <RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Label Text="{i18n:TranslateExtension WorkItemTypeLabel}" Grid.Row="0"></Label>
+		<c:BindablePicker ItemsSource="{Binding WorkItemTypes}" SelectedItem="{Binding SelectedWorkItemType}" Grid.Row="1"></c:BindablePicker>
+	  </Grid>
+	  <Grid Grid.Row="5">
 		<Grid.RowDefinitions>
 		  <RowDefinition Height="Auto" />
 		  <RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<Label Text="{i18n:TranslateExtension StateLabel}" Grid.Row="0"></Label>
-		<c:BindablePicker ItemsSource="{Binding WorkItemStates}" SelectedItem="{Binding SelectedState}" Grid.Row="1"></c:BindablePicker>
+		<c:BindablePicker IsEnabled="{Binding IsWorkItemStatePickerEnabled}" ItemsSource="{Binding WorkItemStates}" SelectedItem="{Binding SelectedState}" Grid.Row="1"></c:BindablePicker>
 	  </Grid>
-	  <Grid Grid.Row="5">
+	  <Grid Grid.Row="6">
 		<Grid.RowDefinitions>
 		  <RowDefinition Height="Auto" />
 		  <RowDefinition Height="Auto" />

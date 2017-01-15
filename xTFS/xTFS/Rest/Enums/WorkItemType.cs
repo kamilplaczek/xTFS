@@ -14,10 +14,11 @@ namespace xTFS.Rest.Enums
 		[EnumMember(Value = "Product Backlog Item")]
 		PBI,
 		[EnumMember(Value = "Bug")]
-		Bug,
-		[EnumMember(Value = "Feature")]
-		Feature,
-		[EnumMember(Value = "Epic")]
-		Epic
+		Bug
+		// TODO: Add proper support.
+		//[EnumMember(Value = "Feature")]
+		//Feature,
+		//[EnumMember(Value = "Epic")]
+		//Epic
 	}
 }

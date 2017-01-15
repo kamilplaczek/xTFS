@@ -69,9 +69,9 @@ namespace xTFS.Rest
 			return result;
 		}
 
-		public async Task<WorkItem> CreateTask(string project, IEnumerable<WorkItemPatch> patches)
+		public async Task<WorkItem> CreateWorkItem(string project, string itemType, IEnumerable<WorkItemPatch> patches)
 		{
-			var result = await ExecuteRequest<WorkItem>($"DefaultCollection/{project}/_apis/wit/workitems/$Task?api-version=1.0", Method.PATCH, patches, "application/json-patch+json");
+			var result = await ExecuteRequest<WorkItem>($"DefaultCollection/{project}/_apis/wit/workitems/${itemType}?api-version=1.0", Method.PATCH, patches, "application/json-patch+json");
 			return result;
 		}
 
